@@ -1,0 +1,29 @@
+# This is the dependabot configuration file that automates dependency updates
+# Updates section configures how dependabot should handle dependency updates:
+# - Monitors devcontainer features in the root directory (though convention is .devcontainer and it should check there by default)
+# - Monitors NPM dependencies in the possible-solutions directory
+# - Checks for updates weekly
+# - Groups updates based on their type (dev grouped by minor/patch or prod grouped by patch)
+#
+# Learn more at https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#configuration-options-for-the-dependabotyml-file
+
+version: 2
+updates:
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /possible-solution/client
+    schedule:
+      interval: weekly
+    groups:
+      npm-development:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+      npm-production:
+        dependency-type: production
+        update-types:
+          - patch
